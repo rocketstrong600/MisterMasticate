@@ -1,0 +1,90 @@
+/* Style the tab */
+#LoginPage {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#Background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+#loginGrandParent {
+    display: table;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#loginParent {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#form_login {
+    width:300px;
+    margin: 8px 0;
+    padding: 12px 20px;
+    border: 3px solid coral;
+    background-color: #27d5db;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    background-color: #ECECEC;
+}
+
+.progress {
+  height: 1.5em;
+  width: 100%;
+  background-color: #c9c9c9;
+  position: relative;
+}
+.progress:before {
+  content: attr(data-label);
+  font-size: 0.8em;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  left: 0;
+  right: 0;
+}
+.progress .value {
+  display: inline-block;
+  height: 100%;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/MisterMasticate/static/css/Main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/2.0.0/trianglify.min.js"></script>
+<title>Dungons And Dargons</title>
+</head>
+<body onresize="Background()">
+<H1>Dungons And Dargons</H1>
+<H3>Hey, {{ Username }}, you are level <span style="color: magenta; ">{{ Level }}</span> and have <span style="color: gold; ">{{ Gold }}</span> Gold.</H3>
+<iframe src="/bars?username={{ Username }}" frameBorder="0" width="100%" height="110pc"></iframe>
+<!-- Tab links -->
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'Main')" id="defaultOpen">Main</button>
+  <button class="tablinks" onclick="openTab(event, 'Inventory')">Inventory</button>
+  <button class="tablinks" onclick="openTab(event, 'Spells')">Spells</button>
+  <button class="tablinks" onclick="openTab(event, 'Combat')">Combat</button>
+  <button class="tablinks" onclick="openTab(event, 'Map')">Map</button>
+  <button class="tablinks" onclick="window.location.href='/logout'" style="float:right;">Logout</button>
+</div>
+
+<!-- Tab content -->
+<div id="Main" class="tabcontent">
+    <iframe src="/stats?username={{ Username }}" frameBorder="0" height="265pc"></iframe>
+</div>
+
+<div id="Inventory" class="tabcontent">
+    <iframe src="/inv?username={{ Username }}" frameBorder="0" height="265pc"></iframe>
+</div>
+
+<div id="Spells" class="tabcontent">
+  <h3>Spells</h3>
+  <p>Test</p>
+</div>
+
+<div id="Combat" class="tabcontent">
+  <h3>Combat</h3>
+  <p>Test</p>
+</div>
+
+<div id="Map" class="tabcontent">
+  <h3>Map</h3>
+  <p>Test</p>
+</div>
+
+</body>
+</html>
+
+<script>
+	function openTab(evt, cityName) {
+	  // Declare all variables
+	  var i, tabcontent, tablinks;
+
+	  // Get all elements with class="tabcontent" and hide them
+	  tabcontent = document.getElementsByClassName("tabcontent");
+	  for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	  }
+
+	  // Get all elements with class="tablinks" and remove the class "active"
+	  tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  }
+
+	  // Show the current tab, and add an "active" class to the button that opened the tab
+	  document.getElementById(cityName).style.display = "block";
+	  evt.currentTarget.className += " active";
+	}
+	function Background() {
+		var pattern = Trianglify({
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+		//document.body.removeChild()
+		var canvas = pattern.canvas();
+		canvas.id = "Background";
+		document.body.appendChild(canvas);
+		document.getElementById("Background").remove();
+		document.body.appendChild(canvas);
+	}
+	Background();
+	document.getElementById("defaultOpen").click();
+</script>

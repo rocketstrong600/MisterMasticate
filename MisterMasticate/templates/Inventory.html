@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory</title>
+    <link rel="stylesheet" type="text/css" href="/MisterMasticate/static/css/Main.css">
+</head>
+<body>
+<div class="Item">
+    <table>
+            {% for item in Items %}
+                <tr>
+                    <td><button class="Invlinks" style="width: 100%" title="{{ item[1] }}">{{item[0]}}</button></td>
+                </tr>
+            {%endfor%}
+    </table>
+</div>
+</body>
+</html>

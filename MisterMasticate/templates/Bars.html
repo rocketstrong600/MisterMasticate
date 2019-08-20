@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stats</title>
+    <link rel="stylesheet" type="text/css" href="/MisterMasticate/static/css/Main.css">
+</head>
+<body>
+    <table class="stattable" style="width: 100%;">
+        <tr class="statitem">
+            <td>
+                <div class="progress" data-label="HP: {{ HPCur }}/{{ HPMax }}">
+                    <span class="value" style="width:{{ HealthPercent }}%;background-color: #4CAF50;"></span>
+                </div>
+            </td>
+        </tr>
+        <tr class="statitem">
+            <td>
+                <div class="progress" data-label="MP: {{ MPCur }}/{{ MPMax }}">
+                    <span class="value" style="width:{{ ManaPercent }}%;background-color: #0000ff;"></span>
+                </div>
+            </td>
+        </tr>
+        <tr class="statitem">
+            <td>
+                <div class="progress" data-label="XP: {{ XPCur }}/{{ XPMax }}">
+                    <span class="value" style="width:{{ XPPercent }}%;background-color: #00FFFF;"></span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

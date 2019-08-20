@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" id="LoginPage">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/MisterMasticate/static/css/Main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/2.0.0/trianglify.min.js"></script>
+    <title>Login</title>
+</head>
+<body onresize="Background()" id="LoginPage">
+<div id="loginGrandParent">
+    <div id="loginParent">
+    <form action="" id="form_login" method="post">
+        <p>Username: <input type=text name=username></p>
+        <p>password: <input type=password name=password></p>
+        <p><input type=submit value=Login>  {{ message }}</p>
+    </form>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+	function Background() {
+		var pattern = Trianglify({
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+		var canvas = pattern.canvas();
+		canvas.id = "Background";
+		document.body.appendChild(canvas);
+		document.getElementById("Background").remove();
+		document.body.appendChild(canvas);
+	}
+	Background();
+</script>
