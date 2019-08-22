@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="/MisterMasticate/static/css/Main.css">
+    <link rel="stylesheet" type="text/css" href="static/css/Main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/2.0.0/trianglify.min.js"></script>
 <title>Dungons And Dargons</title>
 </head>
 <body onresize="Background()">
 <H1>Dungons And Dargons</H1>
-<H3>Hey, {{ Username }}, you are level <span style="color: magenta; ">{{ Level }}</span> and have <span style="color: gold; ">{{ Gold }}</span> Gold.</H3>
-<iframe src="/bars?username={{ Username }}" frameBorder="0" width="100%" height="110pc"></iframe>
+<H3>Hey, {{ player.username }}, you are level <span style="color: magenta; ">{{ player.level }}</span></H3>
+<div>
+    <table class="stattable" style="width: 100%;">
+        {% for stat in player.stats %}
+            {% if stat.bar %}
+                <tr class="statitem">
+                    <td>
+                        <div class="progress" data-label="{{ stat.name }}: {{ stat.current }}/{{ stat.total() }}">
+                            <span class="value" style="width:{{ stat.percent() }}%;background-color: {{ stat.colour() }};"></span>
+                        </div>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+</div>
 <!-- Tab links -->
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'Main')" id="defaultOpen">Main</button>
@@ -21,11 +35,29 @@
 
 <!-- Tab content -->
 <div id="Main" class="tabcontent">
-    <iframe src="/stats?username={{ Username }}" frameBorder="0" height="265pc"></iframe>
+    <div>
+        <table class="stattable">
+            <tr class="statitem">
+                <th>Stat</th>
+                <th>Intrinsic</th>
+                <th>Equipment</th>
+                <th>Total</th>
+            </tr>
+            {% for stat in player.stats %}
+                {% if not stat.bar %}
+                    <tr class="statitem">
+                        <td><strong>{{ stat.name }}</strong></td>
+                        <td>{{ stat.intrinsic }}</td>
+                        <td>{{ stat.equipment }}</td>
+                        <td>{{ stat.total() }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
 </div>
 
 <div id="Inventory" class="tabcontent">
-    <iframe src="/inv?username={{ Username }}" frameBorder="0" height="265pc"></iframe>
 </div>
 
 <div id="Spells" class="tabcontent">
