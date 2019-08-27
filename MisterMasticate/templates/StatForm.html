@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>stat</title>
+</head>
+<body>
+    <div>
+        <table class="stattable">
+            <tr class="statitem">
+                <th>Stat</th>
+                <th>Intrinsic</th>
+                <th>Equipment</th>
+                <th>Total</th>
+            </tr>
+            {% for stat in player.stats %}
+                {% if not stat.bar %}
+                    <tr class="statitem">
+                        <td><strong>{{ stat.name }}</strong></td>
+                        <td>{{ stat.intrinsic }}</td>
+                        <td>{{ stat.equipment }}</td>
+                        <td>{{ stat.total() }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    <form action="" method="post">
+        <p>Stat Name: <input type=text name=sname></p>
+        <p>intrinsic: <input type=number name=intrinsic></p>
+        <p>equipment: <input type=number name=equipment></p>
+        <p>total: <input type=number name=total></p>
+        <p><input type=Add value=Create></p>
+    </form>
+</body>
+</html>

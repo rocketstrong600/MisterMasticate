@@ -9,6 +9,7 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    charactername = db.Column(db.String(50), nullable=False)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     gamemaster = db.Column(db.Boolean, nullable=False, default=False)
@@ -22,7 +23,7 @@ class User(db.Model, UserMixin):
     spells = db.relationship('Spell', backref='owner', lazy=True)
 
     def __repr__(self):
-        return f"User('{self.username}')"
+        return "User("+"self.username"+"')"
 
 
 class Stat(db.Model):
@@ -34,7 +35,7 @@ class Stat(db.Model):
     colour_low = db.Column(db.String(10), nullable=True)
     high_percent = db.Column(db.Integer, nullable=True, default='50')
     mid_percent = db.Column(db.Integer, nullable=True, default='25')
-    bar = db.Column(db.Boolean, nullable=False)
+    bar = db.Column(db.Boolean, nullable=False, default=False)
     current = db.Column(db.Integer, nullable=True)
     intrinsic = db.Column(db.Integer, nullable=False)
     equipment = db.Column(db.Integer, nullable=True)
@@ -42,7 +43,7 @@ class Stat(db.Model):
     buff_amount = db.Column(db.Integer, nullable=True)
 
     def __repr__(self):
-        return f"Stat('{self.name}')"
+        return "Stat('"+"self.name"+"')"
 
     def total(self):
         return self.intrinsic + self.equipment + self.buff_amount
@@ -65,10 +66,10 @@ class Modifier(db.Model):
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     modifies_name = db.Column(db.String(100), nullable=False)
-    modifier = db.Column(db.Integer, nullable=False)
+    modifier = db.Column(db.Integer, nullable=False, default=0)
 
     def __repr__(self):
-        return f"Modifier('{self.name}', '{self.modifies_name}', '{self.modifier}')"
+        return "Modifier('"+"self.name"+"', '"+"self.modifies_name"+"', '"+"self.modifier"+"')"
 
 
 class Property(db.Model):
@@ -76,10 +77,10 @@ class Property(db.Model):
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=True)
     spell_id = db.Column(db.Integer, db.ForeignKey('spell.id'), nullable=True)
     name = db.Column(db.String(100), nullable=False)
-    value = db.Column(db.Integer, nullable=False)
+    value = db.Column(db.Integer, nullable=False, default=0)
 
     def __repr__(self):
-        return f"Modifier('{self.name}', '{self.modifies_name}', '{self.modifier}')"
+        return "Modifier('"+"self.name"+"', '"+"self.modifies_name"+"', '"+"self.modifier"+"')"
 
 
 class Item(db.Model):
@@ -92,7 +93,7 @@ class Item(db.Model):
     properties = db.relationship('Property', lazy=True)
 
     def __repr__(self):
-        return f"Item('{self.Name}')"
+        return "Item('"+"self.Name"+"')"
 
 
 class Spell(db.Model):
@@ -104,4 +105,4 @@ class Spell(db.Model):
     property = db.relationship('Property', lazy=True)
 
     def __repr__(self):
-        return f"Spell('{self.name}')"
+        return "Spell('"+"self.name"+"')"
