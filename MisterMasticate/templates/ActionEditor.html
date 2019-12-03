@@ -16,12 +16,13 @@
         #blocklyArea {
             height: 100%;
             width: 100%;
+            z-index:1;
         }
     </style>
 </head>
 <body>
 <div id="blocklyArea"></div>
-<div id="blocklyDiv" style="position: absolute"></div>
+<div id="blocklyDiv" style="position: absolute; z-index:1"></div>
 
 <xml id="toolbox" style="display: none">
     <category id="catLogic" colour="210" name="Logic">
@@ -326,11 +327,9 @@
     <category id="catVariables" colour="330" custom="VARIABLE" name="Variables"></category>
     <category id="catFunctions" colour="290" custom="PROCEDURE" name="Functions"></category>
 </xml>
-<xml id="blocklyDefault" style="display: none">
-    {{ ActionScript }}
-</xml>
+
+<button type="button" style="position:absolute; left:0px; bottom:0px; width:107.375px; z-index:2" onclick="SaveXML();">Save</button>
 <script>
-  var blocklyDefault = document.getElementById('blocklyDefault');
   var blocklyArea = document.getElementById('blocklyArea');
   var blocklyDiv = document.getElementById('blocklyDiv');
   var workspace = Blockly.inject(blocklyDiv,
@@ -353,7 +352,16 @@
   window.addEventListener('resize', onresize, false);
   onresize();
   Blockly.svgResize(workspace);
-  Blockly.Xml.domToWorkspace(blocklyDefault, workspace);
+  Blockly.Xml.domToWorkspace(lockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="controls_if" id="Yu.@JT@~n7$9FqkEvIpx" x="249" y="70"/></xml>'), workspace);
+
+  function SaveXML() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", window.location.href, true);
+    //xhr.setRequestHeader('Content-Type', 'application/xml');
+    var xml = Blockly.Xml.workspaceToDom(workspace);
+    var xml_text = Blockly.Xml.domToText(xml);
+    xhr.send(xml_text);
+  }
 </script>
 </body>
 </html>

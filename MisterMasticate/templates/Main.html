@@ -58,6 +58,15 @@
 </div>
 
 <div id="Inventory" class="tabcontent">
+    <div class="Item">
+        <table>
+                {% for item in player.items %}
+                    <tr>
+                        <td><button class="Invlinks" style="width: 100%">{{ item.name }}</button></td>
+                    </tr>
+                {%endfor%}
+        </table>
+    </div>
 </div>
 
 <div id="Spells" class="tabcontent">

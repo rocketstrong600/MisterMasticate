@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Item</title>
+    <script src="static/js/textboxio/textboxio.js"></script>
 </head>
 <body>
-$END$
+    <div class="Item">
+    <table>
+            {% for item in player.items %}
+                <tr>
+                    <td><button class="Invlinks" style="width: 100%">{{ item.name }}</button></td>
+                </tr>
+            {%endfor%}
+    </table>
+    </div>
+    <form action="" method="post">
+        <p>Item Name: <input type="text" name="iname"></p>
+        <textarea id="Description" name="idescription" style="margin:10px 0;height:100%;">Description<br /><span style="color: rgb(204, 204, 204);">Flavor Text</span><br /></textarea>
+        <p><input type="submit" value="Add"></p>
+    </form>
+    <script type="text/javascript">
+        var editor = textboxio.replace('#Description');
+    </script>
 </body>
 </html>

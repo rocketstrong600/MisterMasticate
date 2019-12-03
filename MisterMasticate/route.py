@@ -24,29 +24,55 @@ def cform():
         newuser = User(username=username, password=password, charactername=cname, gamemaster=False, level=int(level), xp=int(xp), xpreq=int(xpreq))
         db.session.add(newuser)
         db.session.commit()
+        return redirect(url_for('cform'))
     return render_template("CharacterForm.html")
+
+@app.route('/iform', methods=["GET", "POST"])
+@login_required
+def iform():
+    if request.method == 'POST':
+        iname = request.form['iname']
+        idescription = request.form['idescription']
+        newitem = Item(name=iname, description=idescription, user_id=current_user.id)
+        db.session.add(newitem)
+        db.session.commit()
+        return redirect(url_for('iform'))
+    return render_template("ItemForm.html", player=current_user)
 
 @app.route('/sform', methods=["GET", "POST"])
 @login_required
 def sform():
     if request.method == 'POST':
+        bar = request.form['bar']
         sname = request.form['sname']
         intrinsic = request.form['intrinsic']
-        equipment = request.form['equipment']
-        total = request.form['total']
-        newstat = Stat(name=sname, intrinsic=intrinsic, equipment=equipment, total=total, user_id=current_user.id, bar=False)
-        db.session.add(newstat)
-        db.session.commit()
+        if bar == "False":
+            newstat = Stat(name=sname, intrinsic=int(intrinsic), equipment=int(0), user_id=current_user.id, bar=False)
+            db.session.add(newstat)
+            db.session.commit()
+        else:
+            current = request.form['current']
+            colour_low = request.form['colour_low']
+            colour_mid = request.form['colour_mid']
+            colour_high = request.form['colour_high']
+            mid_percent = request.form['mid_percent']
+            high_percent = request.form['high_percent']
+            newstat = Stat(name=sname, intrinsic=int(intrinsic), user_id=current_user.id, bar=True, current=int(current),
+                           colour_low=colour_low, colour_mid=colour_mid, colour_high=colour_high,
+                           mid_percent=int(mid_percent), high_percent=int(high_percent))
+            db.session.add(newstat)
+            db.session.commit()
+        return redirect(url_for('sform'))
     return render_template("StatForm.html", player=current_user)
 
 
 @app.route('/action_editor', methods=["GET", "POST"])
 @login_required
 def action_editor():
-    thing = request.args.get['thing']
-    things_id = request.args.get['id']
+    thing = request.args.get('thing')
+    things_id = request.args.get('id')
     if request.method == 'POST':
-        action_script = request.form['ActionScript']
+        action_script = request.data
         if thing == "player":
             User.query.get(int(things_id)).action_script = action_script
         elif thing == "item":

@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="static/css/Main.css">
     <title>stat</title>
 </head>
 <body>
     <div>
+        <table class="stattable" style="width: 100%;">
+            {% for stat in player.stats %}
+                {% if stat.bar %}
+                    <tr class="statitem">
+                        <td>
+                            <div class="progress" data-label="{{ stat.name }}: {{ stat.current }}/{{ stat.total() }}">
+                                <span class="value" style="width:{{ stat.percent() }}%;background-color: {{ stat.colour() }};"></span>
+                            </div>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
         <table class="stattable">
             <tr class="statitem">
                 <th>Stat</th>
@@ -28,9 +42,20 @@
     <form action="" method="post">
         <p>Stat Name: <input type=text name=sname></p>
         <p>intrinsic: <input type=number name=intrinsic></p>
-        <p>equipment: <input type=number name=equipment></p>
-        <p>total: <input type=number name=total></p>
-        <p><input type=Add value=Create></p>
+        <p>Bar:
+            <select name="bar">
+                <option value="False">False</option>
+                <option value="True">True</option>
+            </select>
+        </p>
+        <p>--IF BAR ENTER INFO BELLOW--</p>
+        <p>current: <input type=number name=current></p>
+        <p>Colour Low: <input type=color name=colour_low value="#ff0000"></p>
+        <p>Colour Mid: <input type=color name=colour_mid value="#ffff00"></p>
+        <p>Colour High: <input type=color name=colour_high value="#00ff00"></p>
+        <p>mid percent: <input type=number name=mid_percent value="25"></p>
+        <p>high percent: <input type=number name=high_percent value="50"></p>
+        <p><input type=submit value=Add></p>
     </form>
 </body>
 </html>

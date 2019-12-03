@@ -46,10 +46,10 @@ class Stat(db.Model):
         return "Stat('"+"self.name"+"')"
 
     def total(self):
-        return self.intrinsic + self.equipment + self.buff_amount
+        return (self.intrinsic or 0) + (self.equipment or 0) + (self.buff_amount or 0)
 
     def percent(self):
-        return (self.current/self.total())*100
+        return (self.current or 0) / (self.total() or 0) * 100
 
     def colour(self):
         if self.percent() >= self.high_percent:

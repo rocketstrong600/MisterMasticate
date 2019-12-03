@@ -8,9 +8,9 @@
 <body>
 <div class="Item">
     <table>
-            {% for item in Items %}
+            {% for item in player.items %}
                 <tr>
-                    <td><button class="Invlinks" style="width: 100%" title="{{ item[1] }}">{{item[0]}}</button></td>
+                    <td><button class="Invlinks" style="width: 100%">{{ item.name }}</button></td>
                 </tr>
             {%endfor%}
     </table>
