@@ -352,15 +352,16 @@
   window.addEventListener('resize', onresize, false);
   onresize();
   Blockly.svgResize(workspace);
-  Blockly.Xml.domToWorkspace(lockly.Xml.textToDom('<xml xmlns="https://developers.google.com/blockly/xml"><block type="controls_if" id="Yu.@JT@~n7$9FqkEvIpx" x="249" y="70"/></xml>'), workspace);
+  Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom('{{ActionScript|safe}}'), workspace);
 
   function SaveXML() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", window.location.href, true);
-    //xhr.setRequestHeader('Content-Type', 'application/xml');
+    xhr.setRequestHeader('Content-Type', 'application/xml');
     var xml = Blockly.Xml.workspaceToDom(workspace);
     var xml_text = Blockly.Xml.domToText(xml);
     xhr.send(xml_text);
+    alert("Saved");
   }
 </script>
 </body>

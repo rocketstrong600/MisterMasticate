@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     spells = db.relationship('Spell', backref='owner', lazy=True)
 
     def __repr__(self):
-        return "User("+"self.username"+"')"
+        return "User('"+"self.username"+"')"
 
 
 class Stat(db.Model):
@@ -102,7 +102,17 @@ class Spell(db.Model):
     description = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     action_script = db.Column(db.Text, nullable=True)
-    property = db.relationship('Property', lazy=True)
+    properties = db.relationship('Property', lazy=True)
+
+    def __repr__(self):
+        return "Spell('"+"self.name"+"')"
+
+class Ability(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    action_script = db.Column(db.Text, nullable=True)
 
     def __repr__(self):
         return "Spell('"+"self.name"+"')"
