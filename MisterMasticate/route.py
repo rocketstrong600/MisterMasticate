@@ -88,6 +88,7 @@ def action_editor():
                 action_script = Item.query.get(int(things_id)).action_script
             else:
                 action_script = Spell.query.get(int(things_id)).action_script
+            print(action_script)
             return render_template('ActionEditor.html', ActionScript=action_script, player=current_user)
         else:
             return "Gamemaster Area"
