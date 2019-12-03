@@ -122,8 +122,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# sql
+# sqls
 *.db
 
 # secrets
 hiddendata.py
+cloud_sql_proxy
