@@ -123,8 +123,4 @@ dmypy.json
 .pyre/
 
 # sql
-<<<<<<< HEAD
 *.db
-=======
-*.db
->>>>>>> 131f29076bf06ad3e1b3758d6eb9b8a0706593d4
