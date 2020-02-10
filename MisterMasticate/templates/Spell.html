@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{Spell.name|safe}}</title>
+    <link rel="stylesheet" type="text/css" href="static/css/Main.css">
+</head>
+<body>
+    <h1>{{ Spell.name|safe}}</h1>
+    <p>{{Spell.description|safe}}</p>
+    <table>
+        {% for property in Spell.properties %}
+        <tr>
+            <td><strong>{{ property.name|safe}}</strong></td>
+            <td>{{ property.value|safe}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
