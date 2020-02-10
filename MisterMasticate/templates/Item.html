@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Item</title>
+    <title>{{Item.name|safe}}</title>
     <link rel="stylesheet" type="text/css" href="static/css/Main.css">
 </head>
 <body>
-    <h1>{{ Name }}</h1>
-    <p>{{ Description }}</p>
+    <h1>{{ Item.name|safe}}</h1>
+    <p>{{Item.description|safe}}</p>
     <table>
-        {% for property in Properties %}
+        {% for property in Item.properties %}
         <tr>
-            <td><strong>{{ property[0] }}</strong></td>
-            <td>{{ property[1] }}</td>
+            <td><strong>{{ property.name|safe}}</strong></td>
+            <td>{{ property.value|safe}}</td>
         </tr>
         {% endfor %}
     </table>

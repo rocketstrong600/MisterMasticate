@@ -65,6 +65,25 @@ def sform():
         return redirect(url_for('sform'))
     return render_template("StatForm.html", player=current_user)
 
+@app.route('/item', methods=["GET", "POST"])
+@login_required
+def item():
+    things_id = int(request.args.get('id'))
+    Found_Item = Item.query.filter_by(id=things_id).first()
+    if Found_Item:
+        return render_template('Item.html', Item=Found_Item)
+    else:
+        return "Item Not Found"
+
+@app.route('/spell', methods=["GET", "POST"])
+@login_required
+def spell():
+    things_id = int(request.args.get('id'))
+    Found_Spell = Spell.query.filter_by(id=things_id).first()
+    if Found_Spell:
+        return render_template('Spell.html', Spell=Found_Spell)
+    else:
+        return "Spell Not Found"
 
 @app.route('/action_editor', methods=["GET", "POST"])
 @login_required

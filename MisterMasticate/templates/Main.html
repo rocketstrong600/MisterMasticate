@@ -30,6 +30,9 @@
   <button class="tablinks" onclick="openTab(event, 'Spells')">Spells</button>
   <button class="tablinks" onclick="openTab(event, 'Combat')">Combat</button>
   <button class="tablinks" onclick="openTab(event, 'Map')">Map</button>
+  {% if player.gamemaster %}
+  <button class="tablinks" onclick="openTab(event, 'Gamemaster')">Gamemaster</button>
+  {%endif%}
   <button class="tablinks" onclick="window.location.href='/logout'" style="float:right;">Logout</button>
 </div>
 
@@ -60,18 +63,39 @@
 <div id="Inventory" class="tabcontent">
     <div class="Item">
         <table>
-                {% for item in player.items %}
-                    <tr>
-                        <td><button class="Invlinks" style="width: 100%">{{ item.name }}</button></td>
-                    </tr>
-                {%endfor%}
+            <tr>
+                <td valign="top">
+                    <table>
+                        {% for item in player.items %}
+                            <tr>
+                                <td><button class="Invlinks" style="width: 100%" onclick="document.getElementById('Item_Target').contentDocument.location.href = '/item?id={{ item.id }}';">{{ item.name }}</button></td>
+                            </tr>
+                        {%endfor%}
+                    </table>
+                </td>
+                <td><iframe height="300px" width="100%" id="Item_Target"></iframe></td>
+            </tr>
         </table>
     </div>
 </div>
 
 <div id="Spells" class="tabcontent">
-  <h3>Spells</h3>
-  <p>Test</p>
+    <div class="Spell">
+        <table>
+            <tr>
+                <td valign="top">
+                    <table>
+                        {% for item in player.spells %}
+                            <tr>
+                                <td><button class="Invlinks" style="width: 100%" onclick="document.getElementById('Spell_Target').contentDocument.location.href = '/spell?id={{ item.id }}';">{{ item.name }}</button></td>
+                            </tr>
+                        {%endfor%}
+                    </table>
+                </td>
+                <td><iframe height="300px" width="100%" id="Spell_Target"></iframe></td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <div id="Combat" class="tabcontent">
@@ -83,6 +107,12 @@
   <h3>Map</h3>
   <p>Test</p>
 </div>
+{% if player.gamemaster %}
+<div id="Gamemaster" class="tabcontent">
+    <h3>Gamemaster</h3>
+    <p>Test</p>
+</div>
+{%endif%}
 
 </body>
 </html>

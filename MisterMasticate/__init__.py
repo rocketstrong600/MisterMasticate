@@ -4,8 +4,6 @@ from flask_login import LoginManager
 import hiddendata
 import os
 
-cloud_sql_connection_name = os.environ.get("CLOUD_SQL_CONNECTION_NAME")
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = hiddendata.SECRET
 app.config['SQLALCHEMY_DATABASE_URI'] = hiddendata.DB_CON_URL
